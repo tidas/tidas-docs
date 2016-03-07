@@ -37,7 +37,7 @@ Here's the recommended flow for an app as we’d develop it at Trail of Bits.
 
 ## Developer Scenarios
 
-_**We have an existing app with username/password authentication. How do we replace passwords with Tidas?**_
+#### We have an existing app with username/password authentication. How do we replace passwords with Tidas?
 
 Though the particulars will differ for each customer, the general idea is this:
 
@@ -48,11 +48,11 @@ Though the particulars will differ for each customer, the general idea is this:
 5. Associate this tidas_id with the user in your database
 6. Subsequent authentication can work as in our example above
 
-_**What if i want to validate every request?**_  
+#### What if I want to validate every request?
 
 You can, but this could be slow for your users. [Contact us](mailto:hello@passwordlessapps.com) if you want to run a dedicated Tidas server on your own infrastructure.
 
-_**User x gets a new phone, replacing their old one. how do we get them into our system?**_
+#### User x gets a new phone, replacing their old one. how do we get them into our system?
 
 Make sure you capture additional PII during user enrollment (email, phone, etc), so that you can authenticate them out of band in case they lose their device.
 
@@ -69,22 +69,22 @@ For example, allow users to enroll devices with an email address. If the user is
 
 Please note: Tidas provides validation and authentication, but user management is ultimately up to the customer to implement
 
-_**What if the tidas_id I chose for a user is the key in my datastore, and I need to replace their key?**_
+#### What if the tidas_id I chose for a user is the key in my datastore, and I need to replace their key?
 
 In this case you should not send an enrollment request to us until you verify this user is valid (e.g. use an email as described above)
 
 Once the user is validated as real, send the enrollment request through the tidas middleware, including the `overwrite: true` option to replace the public key for this user.
 
-_**User loses device, backs up to before Tidas was enabled, etc**_
+#### User loses device, backs up to before Tidas was enabled, etc
 
 This is the same as the above case - just validate a new enrollment request out of band.
 
-_**User gets an additional device, which they use in parallel to their first one**_
+#### User gets an additional device, which they use in parallel to their first one
 
 Tidas identity lookups are silo’d by application and customer, but are mapped 1:1. We don’t allow one Identity to have many keys, since the unit of identity is the device.
 
 You can set up your user database to allow multiple tidas_ids per user, (much like an ecommerce site might allow multiple credit cards), and still be able to validate data for one user with multiple devices
 
-_**User removes fingerprints from their device**_
+#### User removes fingerprints from their device
 
 If this happens, you need to support an additional way to validate your users, or ask them to re-add fingerprints. When fingerprints are not found, tidas will raise an error explaining this as the source of the problem
