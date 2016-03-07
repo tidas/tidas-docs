@@ -1,10 +1,8 @@
 # Tidas Developer Guide/FAQ
 
-## Break it down for me
-
 iPhones with TouchID have a separate chip inside that Apple calls the Secure Enclave (SE). The SE performs crypto tasks on input while disallowing access to the sensitive data it holds.
 
-For example, if you add a fingerprint to an iPhone, there’s no way to get that actual fingerprint data back out. You can only pass in another data from another fingerprint, and ask if it matches a fingerprint inside the SE.
+For example, if you add a fingerprint to an iPhone, there’s no way to get that actual fingerprint data back out. You can only pass in data from another fingerprint, and ask if it matches a fingerprint inside the SE.
 
 When you use the SE to generate a key pair, the private key is created and stored inside the SE. The key can then be used to perform encryption tasks within the SE.
 
@@ -12,7 +10,7 @@ Tidas uses the private key on a user’s phone by searching for it by name. The 
 
 _"Dear iPhone, if there’s a private key by this name inside the Secure Enclave, can you please use it to sign this piece of data I’m providing you? Thanks so much.”_
 
-Tidas transparently handles key management and wrapping up responses in strings which the middleware can consume. If things don’t work out (failed auth/ canceled auth/ etc), you’re given back an error which you can handle as you see fit.
+Tidas transparently handles key management and wrapping up responses in strings which the middleware can consume. If things don’t work out (failed auth/canceled auth/etc), you’re given back an error which you can handle as you see fit.
 
 ## So how would you use it?
 
@@ -52,7 +50,7 @@ Though the particulars will differ for each customer, the general idea is this:
 
 You can, but this could be slow for your users. [Contact us](mailto:hello@passwordlessapps.com) if you want to run a dedicated Tidas server on your own infrastructure.
 
-#### User x gets a new phone, replacing their old one. how do we get them into our system?
+#### User x gets a new phone, replacing their old one. How do we get them into our system?
 
 Make sure you capture additional PII during user enrollment (email, phone, etc), so that you can authenticate them out of band in case they lose their device.
 
@@ -67,11 +65,11 @@ For example, allow users to enroll devices with an email address. If the user is
 5. You can then attach this user’s information on their server to the new tidas_id
 6. You can then deactivate the user’s previous tidas_id, which is now useless
 
-Please note: Tidas provides validation and authentication, but user management is ultimately up to the customer to implement
+Note that Tidas provides validation and authentication, but user management is ultimately up to the customer to implement.
 
 #### What if the tidas_id I chose for a user is the key in my datastore, and I need to replace their key?
 
-In this case you should not send an enrollment request to us until you verify this user is valid (e.g. use an email as described above)
+In this case you should not send an enrollment request to us until you verify this user is valid (e.g. use an email as described above).
 
 Once the user is validated as real, send the enrollment request through the tidas middleware, including the `overwrite: true` option to replace the public key for this user.
 
@@ -83,7 +81,7 @@ This is the same as the above case - just validate a new enrollment request out 
 
 Tidas identity lookups are silo’d by application and customer, but are mapped 1:1. We don’t allow one Identity to have many keys, since the unit of identity is the device.
 
-You can set up your user database to allow multiple tidas_ids per user, (much like an ecommerce site might allow multiple credit cards), and still be able to validate data for one user with multiple devices
+You can set up your user database to allow multiple tidas_ids per user, (much like an ecommerce site might allow multiple credit cards), and still be able to validate data for one user with multiple devices.
 
 #### User removes fingerprints from their device
 
