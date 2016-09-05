@@ -7,6 +7,7 @@ For the quickest way to get started, see our tutorial [Tidas from Scratch](https
 * [Ruby Middleware API Doc](https://github.com/tidas/tidas-docs/blob/master/tidas-middleware-ruby-api-doc.md)  
 * [Obj-C Client API Doc](https://github.com/tidas/tidas-docs/blob/master/obj-c-client-library-api-doc.md)
 * [Tidas Developer Guide/FAQ](https://github.com/tidas/tidas-docs/blob/master/developer-guide-faq.md)
+* [Protocol Documentation](http://www.darthnull.org/2016/02/10/tidas-auth) (3rd Party)
 
 ## Issues & Future Work
 * File general Tidas issues and feature requests here: [Tidas Issues](https://github.com/tidas/tidas-docs/issues)
